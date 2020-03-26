@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 using System.Linq;
 using Server.Model;
+using ConsoleApp8.Model;
 // State object for reading client data asynchronously  
 public class StateObject
 {
@@ -133,7 +134,7 @@ public class AsynchronousSocketListener
 
                 content = content.Replace("<EOF>","");
                 var str = content.Split("|");
-                Send(handler, DataHandler(str[0], str[1], handler));
+                Send(handler, DataHandlerAsync(str[0], str[1], handler));
             }
             else
             {
@@ -144,13 +145,28 @@ public class AsynchronousSocketListener
         }
     }
 
-    private string DataHandler(string id, string content, Socket handler)
+    private string DataHandlerAsync(string id, string content, Socket handler)
     {
-        Console.WriteLine("id: "+id +"\t data: "+ content);
-        if (content== "connReq" && !program.clients.Any(p => p.id == id))
-            program.clients.Add(new Clinet() { id = id, sck = handler });
+        if (content == "getState")
+        { return  Field.Instance.objectTOjson(); }
+        if (content == "JSON:")
+        {
+            content.Replace("JSON:", "");
+            Field.Instance.jsonTOobject(content); }
 
-        return content;
+        
+        Clinet cli;
+        cli = program.clients.Where(p => p.id == id).FirstOrDefault();
+        Console.WriteLine("id: "+id +"\t data: "+ content);
+        if (content == "connReq")
+        {
+            program.clients.Add(new Clinet() { id = id, sck = handler,cmd="" });
+            cli = program.clients.Where(p => p.id == id).FirstOrDefault();
+        }
+        while (cli.cmd == "")
+        { Thread.Sleep(500); }
+        cli.cmd = "";
+        return cli.cmd;
     }
 
     public void Send(Socket handler, String data)

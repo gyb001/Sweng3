@@ -45,11 +45,21 @@ namespace Sweng3
 
             //GUI
             new Gui().Show();
+
             //START
             bool first = new Random().NextDouble() >= 0.5;
-            AsynchronousSocketListener.Instance.Send(clients[0].sck, first ? "first" : "secound");
-            AsynchronousSocketListener.Instance.Send(clients[1].sck, !first ? "first" : "secound");
+            Console.WriteLine(first ? clients[0].id : clients[1].id + " start the game");
+            clients[0].cmd= first ? "true" : "false";
+            clients[1].cmd= !first ? "true" : "false";
 
+            while (true)
+            {
+                var sleep = Task.Delay(1000);
+                clients[0].cmd = first ? "true" : "false";
+                clients[1].cmd = !first ? "true" : "false";
+                await sleep;
+             
+            }
             Console.ReadLine();
            
         }

@@ -83,11 +83,11 @@ namespace ConsoleApp8.Model
                 _field[y][x].Color = Color.Red;
             }
         }
-        public async Task GetCellsFronJson(string JSON)
+        public void jsonTOobject(string JSON)
         {
             instance._field = JsonConvert.DeserializeObject<List<List<Cell>>>(JSON);
         }
-        public async Task<string> GetJsonFromCellFronJson()
+        public  string objectTOjson()
         {
             return JsonConvert.SerializeObject(instance._field);
         }
