@@ -23,6 +23,7 @@ namespace Server
 
         public async Task StartListening()
         {
+
             listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             listener.Bind(new IPEndPoint(IPAddress.Any, 9999));
             listener.Listen(20);
