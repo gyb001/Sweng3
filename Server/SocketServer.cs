@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-
+    /*
     public class SocketServers
     {
 
 
 
-       public static List<Socket> clients = new List<Socket>();
+        public static List<Socket> clients = new List<Socket>();
 
 
         private Socket listener;
@@ -48,8 +48,7 @@ namespace Server
 
             if (ret.Contains("connection request"))
             {
-              //  IPEndPoint remoteIpEndPoint = client.RemoteEndPoint as IPEndPoint;
-                clients.Add(client);//remoteIpEndPoint.Address);
+                clients.Add(client);
                 Send(client, "connected");
                 Send(client, "waiting");
             }
@@ -62,7 +61,7 @@ namespace Server
 
         public static void Send(Socket client, String data)
         {
-          byte[] byteData = Encoding.ASCII.GetBytes(data);
+            byte[] byteData = Encoding.ASCII.GetBytes(data);
 
             client.BeginSend(byteData, 0, byteData.Length, 0,
                 new AsyncCallback(SendCallback), client);
@@ -82,6 +81,6 @@ namespace Server
             }
         }
 
-    }
+    }*/
 
 }
