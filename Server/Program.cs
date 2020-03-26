@@ -51,6 +51,8 @@ namespace Sweng3
             Console.WriteLine(first ? clients[0].id : clients[1].id + " start the game");
             clients[0].cmd= first ? "true" : "false";
             clients[1].cmd= !first ? "true" : "false";
+            clients[0].col = Color.Blue;
+            clients[1].col = Color.Red;
 
             while (true)
             {

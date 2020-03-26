@@ -72,7 +72,7 @@ public class AsynchronousSocketListener
                 allDone.Reset();
 
                 // Start an asynchronous socket to listen for connections.  
-                Console.WriteLine("Waiting for a connection...");
+             //   Console.WriteLine("Waiting for a connection...");
                 listener.BeginAccept(
                     new AsyncCallback(AcceptCallback),
                     listener);
@@ -87,8 +87,7 @@ public class AsynchronousSocketListener
             Console.WriteLine(e.ToString());
         }
 
-        Console.WriteLine("\nPress ENTER to continue...");
-        Console.Read();
+    
 
     }
 
@@ -157,7 +156,7 @@ public class AsynchronousSocketListener
         
         Clinet cli;
         cli = program.clients.Where(p => p.id == id).FirstOrDefault();
-        Console.WriteLine("id: "+id +"\t data: "+ content);
+      //  Console.WriteLine("id: "+id +"\t data: "+ content);
         if (content == "connReq")
         {
             program.clients.Add(new Clinet() { id = id, sck = handler,cmd="" });
