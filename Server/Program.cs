@@ -23,30 +23,35 @@ namespace Sweng3
 
             SocketServers ret = new SocketServers();
             ret.StartListening();
-            
+
+
+            //CONNECTING
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Waiting for clients");
-                foreach (var i in SocketServers.clients)
-                {
-                    Console.WriteLine("Conencted client: "+i.ToString());
-                    
-                }
-                
+                Console.WriteLine("Conencted client: " + SocketServers.clients.Count);
                 await Task.Delay(1000);
                 if (SocketServers.clients.Count >= 2)
                 { break; }
 
             }
 
-            Console.WriteLine("client connected, Game will start asap");
+            Console.WriteLine("Client connected, Game will start asap");
             await Task.Delay(2000);
 
+
+            //GUI
             new Gui().Show();
 
-         
-        
+            //START
+            bool first = new Random().NextDouble() >= 0.5;
+            SocketServers.Send(SocketServers.clients[0], first ? "first" : "secound");
+            SocketServers.Send(SocketServers.clients[1], !first ? "first" : "secound");
+
+
+
+
+
 
         }
     }

@@ -15,7 +15,7 @@ namespace Server
 
 
 
-       public static List<IPAddress> clients = new List<IPAddress>();
+       public static List<Socket> clients = new List<Socket>();
 
 
         private Socket listener;
@@ -47,14 +47,38 @@ namespace Server
 
             if (ret.Contains("connection request"))
             {
-                IPEndPoint remoteIpEndPoint = client.RemoteEndPoint as IPEndPoint;
-                clients.Add(remoteIpEndPoint.Address);
+              //  IPEndPoint remoteIpEndPoint = client.RemoteEndPoint as IPEndPoint;
+                clients.Add(client);//remoteIpEndPoint.Address);
+                Send(client, "connected");
+                Send(client, "waiting");
             }
             else
                 Field.Instance.GetCellsFronJson(ret);
 
             buffer = new byte[8192];
             client.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, OnDataReceived, client);
+        }
+
+        public static void Send(Socket client, String data)
+        {
+          byte[] byteData = Encoding.ASCII.GetBytes(data);
+
+            client.BeginSend(byteData, 0, byteData.Length, 0,
+                new AsyncCallback(SendCallback), client);
+        }
+
+        private static void SendCallback(IAsyncResult ar)
+        {
+            try
+            {
+                Socket client = (Socket)ar.AsyncState;
+                int bytesSent = client.EndSend(ar);
+                Console.WriteLine("Sent {0} bytes to server.", bytesSent);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
         }
 
     }
