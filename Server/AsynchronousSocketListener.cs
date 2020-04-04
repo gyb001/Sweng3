@@ -148,9 +148,9 @@ public class AsynchronousSocketListener
     {
         if (content == "getState")
         { return  Field.Instance.objectTOjson(); }
-        if (content.Contains("JSON:"))
+        if (content.Contains("setState:"))
         {
-            content=content.Replace("JSON:", "");
+            content=content.Replace("setState:", "");
             Field.Instance.jsonTOobject(content); }
 
         

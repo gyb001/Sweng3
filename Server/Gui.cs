@@ -11,8 +11,7 @@ namespace ConsoleApp8
     {
         public async Task Show()
         {
-            while (true)
-            {
+          
                 Console.WriteLine(program.clients[0].id, Console.ForegroundColor = ConsoleColor.Blue);
                 Console.WriteLine(program.clients[1].id, Console.ForegroundColor = ConsoleColor.Red);
                 for (int k = 0; k < Field.Instance.width * 8; k++)
@@ -56,7 +55,7 @@ namespace ConsoleApp8
                 await Task.Delay(1000);
                 Console.Clear();
 
-            }
+           
 
         }
     }

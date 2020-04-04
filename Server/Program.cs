@@ -42,25 +42,18 @@ namespace Sweng3
             Console.WriteLine("Client connected, Game will start asap");
             await Task.Delay(2000);
 
-
-            //GUI
-            new Gui().Show();
-
+            int k = 0;
             //START
-            bool first = new Random().NextDouble() >= 0.5;
-            Console.WriteLine(first ? clients[0].id : clients[1].id + " start the game");
-            clients[0].cmd= first ? "true" : "false";
-            clients[1].cmd= !first ? "true" : "false";
-            clients[0].col = Color.Blue;
-            clients[1].col = Color.Red;
-
             while (true)
             {
-                var sleep = Task.Delay(1000);
-                clients[0].cmd = first ? "true" : "false";
-                clients[1].cmd = !first ? "true" : "false";
-                await sleep;
-             
+                if (k == 0)
+                { k = 1; }
+                else
+                { k = 0; }
+               
+                clients[k].cmd = Field.Instance.objectTOjson();
+                new Gui().Show();
+                await Task.Delay(1000);
             }
             Console.ReadLine();
            
