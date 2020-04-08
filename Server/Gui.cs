@@ -11,20 +11,21 @@ namespace ConsoleApp8
 {
     class Gui
     {
-        string arrayToString(Player[] inp)
+        void arrayToString(Player[] inp)
         {
-            string ret = "";
             foreach (var i in inp)
             { try
-                { Console.Write(i.id.ToString(), Console.ForegroundColor= i.color); }
+                { Console.Write(" "+i.id.ToString()+" ", Console.ForegroundColor= i.color); }
                 catch (Exception e)
-                { Console.Write(" "); }
+                { Console.Write("   "); }
             }
-            return ret;
+         
 
         }
         public async Task Show()
         {
+            Console.Clear();
+            Console.Write("--------------------------------------------------------------\n|", Console.ForegroundColor = ConsoleColor.White);
             for (int i = Field.Instance.yLenght; i >= 0; i--)
             {
                 var val = new Player[Field.Instance.xLenght];
@@ -34,8 +35,9 @@ namespace ConsoleApp8
                     val[k.x] = k;
                 }
                 arrayToString(val);
-                Console.Write("\n");
+                Console.Write("|\n|", Console.ForegroundColor = ConsoleColor.White);
             }
+            Console.WriteLine("--------------------------------------------------------------", Console.ForegroundColor = ConsoleColor.White);
 
         }
     }
