@@ -4,10 +4,10 @@ using System.Text;
 
 namespace ConsoleApp8.Model
 {
-   public enum Color
+   public enum PlayerType
     {
         Red,
         Blue,
-        Yellow
+        Ball
     }
 }
