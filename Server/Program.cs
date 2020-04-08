@@ -19,7 +19,8 @@ namespace Sweng3
 
         public static void Main()
         {
-
+            Field.Instance.ToString();
+           // new Gui().Show();
             Run();
             Console.ReadLine();
         }
@@ -33,7 +34,7 @@ namespace Sweng3
             {
               //  Console.Clear();
                 Console.WriteLine("Conencted client: " + clients.Count);
-                await Task.Delay(1000);
+                await Task.Delay(10000);
                 if (clients.Count >= 2)
                 { break; }
 
@@ -42,10 +43,13 @@ namespace Sweng3
             Console.WriteLine("Client connected, Game will start asap");
             await Task.Delay(2000);
 
+
+            //Ha k=0 akkor az első kliensnek adja a vezérlést, Ha 1 akkor a második. MEg kell ekresni a legközelebbi játékost.
             int k = 0;
             //START
             while (true)
             {
+                
                 if (k == 0)
                 { k = 1; }
                 else
